@@ -1,6 +1,6 @@
-# FLL Schedule Extractor
+# ORTOP to FIRST Event Hub Schedule Converter
 
-A browser-based tool for extracting robot-game schedules from event ZIP files or individual PDFs and exporting the results as CSV. Files are processed locally in your browser and are not uploaded.
+A browser-based tool for converting ORTOP team schedule PDFs (shared with competing teams) into CSV schedules that referees can import into the official FIRST Event Hub platform. Files are processed locally in your browser and are not uploaded.
 
 ## Run locally
 
