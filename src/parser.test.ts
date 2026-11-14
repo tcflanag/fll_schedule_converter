@@ -100,19 +100,8 @@ describe("parseScheduleText", () => {
     expect(csv[1]).toBe('"FLL, ""Regional""","Practice Match","12/06/2024","9:30 AM","9:37 AM","Table 1","33916","Team, One"');
   });
 
-  it("uses a supplied event name for every row, while preserving source names by default", () => {
+  it("sorts CSV rows by time without changing the preview order or event names", () => {
     const records: ScheduleRecord[] = [
-      {
-        eventName: "Source Event A",
-        type: "Practice Match",
-        date: "12/06/2024",
-        startTime: "9:30 AM",
-        endTime: "9:37 AM",
-        location: "Table 1",
-        teamNumber: "33916",
-        teamName: "Team One",
-        sourceFile: "one.pdf",
-      },
       {
         eventName: "Source Event B",
         type: "Official Match 1",
@@ -124,6 +113,17 @@ describe("parseScheduleText", () => {
         teamName: "Team Two",
         sourceFile: "two.pdf",
       },
+      {
+        eventName: "Source Event A",
+        type: "Practice Match",
+        date: "12/06/2024",
+        startTime: "9:30 AM",
+        endTime: "9:37 AM",
+        location: "Table 1",
+        teamNumber: "33916",
+        teamName: "Team One",
+        sourceFile: "one.pdf",
+      },
     ];
 
     const customRows = buildCsv(records, "My Custom Event").split("\r\n");
@@ -133,5 +133,6 @@ describe("parseScheduleText", () => {
     const defaultRows = buildCsv(records).split("\r\n");
     expect(defaultRows[1].startsWith('"Source Event A",')).toBe(true);
     expect(defaultRows[2].startsWith('"Source Event B",')).toBe(true);
+    expect(records.map((record) => record.eventName)).toEqual(["Source Event B", "Source Event A"]);
   });
 });
