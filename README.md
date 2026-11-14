@@ -1,6 +1,6 @@
-# ORTOP to FIRST Event Hub Schedule Converter
+# ORTOP to FIRST(R) Event Hub Schedule Converter
 
-A browser-based tool for converting ORTOP team schedule PDFs (shared with competing teams) into CSV schedules that referees can import into the official FIRST Event Hub platform. Files are processed locally in your browser and are not uploaded.
+A browser-based tool for converting ORTOP team schedule PDFs (shared with competing teams) into CSV schedules that referees can import into the official FIRST(R) Event Hub platform. Files are processed locally in your browser and are not uploaded.
 
 ## Run locally
 
