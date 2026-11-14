@@ -31,15 +31,15 @@ function render(): void {
   app!.innerHTML = `
     <main class="shell">
       <header class="topbar">
-        <a class="brand" href="#" aria-label="ORTOP to FIRST(R) Event Hub schedule converter home">
-          <span class="brand-mark">O</span><span>ORTOP <b>→</b> FIRST(R) Event Hub</span>
+        <a class="brand" href="#" aria-label="ORTOP to FIRST® Event Hub schedule converter home">
+          <span class="brand-mark">O</span><span>ORTOP <b>→</b> FIRST® Event Hub</span>
         </a>
         <span class="local-badge"><i></i> Runs locally in your browser</span>
       </header>
       <section class="intro">
         <div class="eyebrow"><span class="eyebrow-rule"></span> SCHEDULE TOOLKIT</div>
-        <h1>ORTOP schedules,<br><em>ready for FIRST(R) Event Hub.</em></h1>
-        <p>Convert the ORTOP team schedules shared with competitors into a CSV referees can import into FIRST(R) Event Hub to find teams quickly.</p>
+        <h1>ORTOP schedules,<br><em>ready for FIRST® Event Hub.</em></h1>
+        <p>Convert the ORTOP team schedules shared with competitors into a CSV referees can import into FIRST® Event Hub to find teams quickly.</p>
       </section>
       <section class="upload-card ${busy ? "is-busy" : ""}" id="drop-zone">
         <div class="upload-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v4.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V14"/></svg></div>
@@ -53,7 +53,7 @@ function render(): void {
       </section>
       <div class="privacy-note"><span class="lock">⌑</span> Files stay on this device. Nothing is uploaded to a server.</div>
       ${fileResults.length ? renderResults(errorCount, skippedCount, teamCount) : renderGuide()}
-      <footer><span>ORTOP to FIRST(R) Event Hub</span><span>Private by design <b>·</b> CSV export</span></footer>
+      <footer><span>ORTOP to FIRST® Event Hub</span><span>Private by design <b>·</b> CSV export</span></footer>
     </main>`;
 
   document.querySelector<HTMLInputElement>("#file-input")?.addEventListener("change", (event) => {
@@ -89,7 +89,7 @@ function renderGuide(): string {
       <div class="steps">
         <article class="step"><span class="step-number">01</span><div><h3>Add schedules</h3><p>Choose a ZIP containing PDFs, or select individual PDF files together.</p></div></article>
         <article class="step"><span class="step-number">02</span><div><h3>Check the results</h3><p>Review extracted team games and see which files need attention.</p></div></article>
-        <article class="step"><span class="step-number">03</span><div><h3>Import into Event Hub</h3><p>Download the CSV and import it into FIRST(R) Event Hub so referees can find teams quickly.</p></div></article>
+        <article class="step"><span class="step-number">03</span><div><h3>Import into Event Hub</h3><p>Download the CSV and import it into FIRST® Event Hub so referees can find teams quickly.</p></div></article>
       </div>
       <div class="format-note"><span class="format-icon">↳</span><span>Robot-game records only <i>·</i> PDF text extraction <i>·</i> Exact CSV column order</span></div>
     </section>`;
