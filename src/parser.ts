@@ -39,33 +39,19 @@ function getMetadata(text: string): EventMetadata {
   };
 }
 
-function timeToMinutes(time: string): number {
-  const match = time.match(/^(\d{1,2}):(\d{2})\s*([AP]M)$/i);
-  if (!match) return Number.MAX_SAFE_INTEGER;
-  const hour = Number(match[1]) % 12;
-  return hour * 60 + Number(match[2]) + (match[3].toUpperCase() === "PM" ? 720 : 0);
-}
-
 function classifyGames(
   games: Array<{ startTime: string; endTime: string; location: string }>,
 ): Array<{ type: string; startTime: string; endTime: string; location: string }> {
-  const tableOne = games
-    .filter((game) => game.location === "Table 1")
-    .sort((a, b) => timeToMinutes(a.startTime) - timeToMinutes(b.startTime));
-  const tableTwo = games
-    .filter((game) => game.location === "Table 2")
-    .sort((a, b) => timeToMinutes(a.startTime) - timeToMinutes(b.startTime));
-
-  if (tableOne.length === 2 && tableTwo.length === 2 && games.length === 4) {
-    return [
-      { ...tableOne[0], type: "Practice Match" },
-      { ...tableOne[1], type: "Official Match 1" },
-      { ...tableTwo[0], type: "Official Match 2" },
-      { ...tableTwo[1], type: "Official Match 3" },
-    ];
-  }
-
-  return games.map((game) => ({ ...game, type: "Robot Game" }));
+  const matchTypes = [
+    "Practice Match",
+    "Official Match 1",
+    "Official Match 2",
+    "Official Match 3",
+  ];
+  return games.map((game, index) => ({
+    ...game,
+    type: matchTypes[index] ?? "Robot Game",
+  }));
 }
 
 export function parseScheduleText(text: string, sourceFile: string): ParsedText {

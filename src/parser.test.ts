@@ -15,14 +15,14 @@ Hillsboro
 
 Start End Activity
 
-9:30 AM 9:37 AM Robot Game - Table 1
+9:30 AM 9:37 AM Robot Game - Table 2
 10:15 AM 10:45 AM Judging Session - Panel A
-12:00 PM 12:07 PM Robot Game - Table 2
-1:45 PM 1:52 PM Robot Game - Table 1
-2:52 PM 3:00 PM Robot Game - Table 2`;
+10:15 AM 10:22 AM Robot Game - Table 1
+12:00 PM 12:07 PM Robot Game - Table 1
+1:45 PM 1:52 PM Robot Game - Table 2`;
 
 describe("parseScheduleText", () => {
-  it("extracts event metadata and assigns the observed two-table match labels", () => {
+  it("assigns match labels in the order listed, regardless of table or start time", () => {
     const result = parseScheduleText(teamSchedule, "team.pdf");
     expect(result.metadata).toEqual({
       eventName: "FIRST LEGO League Qualifying Tournament - Hillsboro",
@@ -35,10 +35,10 @@ describe("parseScheduleText", () => {
       endTime,
       location,
     ])).toEqual([
-      ["Practice Match", "9:30 AM", "9:37 AM", "Table 1"],
-      ["Official Match 1", "1:45 PM", "1:52 PM", "Table 1"],
-      ["Official Match 2", "12:00 PM", "12:07 PM", "Table 2"],
-      ["Official Match 3", "2:52 PM", "3:00 PM", "Table 2"],
+      ["Practice Match", "9:30 AM", "9:37 AM", "Table 2"],
+      ["Official Match 1", "10:15 AM", "10:22 AM", "Table 1"],
+      ["Official Match 2", "12:00 PM", "12:07 PM", "Table 1"],
+      ["Official Match 3", "1:45 PM", "1:52 PM", "Table 2"],
     ]);
   });
 
@@ -70,13 +70,17 @@ describe("parseScheduleText", () => {
     expect(noTeam.skippedReason).toMatch(/No per-team/);
   });
 
-  it("does not invent match types for schedules with an unexpected table layout", () => {
+  it("labels available games in listed order when the schedule is incomplete", () => {
     const result = parseScheduleText(
-      teamSchedule.replace("2:52 PM 3:00 PM Robot Game - Table 2", ""),
+      teamSchedule.replace("1:45 PM 1:52 PM Robot Game - Table 2", ""),
       "incomplete.pdf",
     );
-    expect(result.records.some((record) => record.type === "Robot Game")).toBe(true);
-    expect(result.issue).toMatch(/could not be inferred/i);
+    expect(result.records.map((record) => record.type)).toEqual([
+      "Practice Match",
+      "Official Match 1",
+      "Official Match 2",
+    ]);
+    expect(result.issue).toBeUndefined();
   });
 
   it("exports the exact requested headers and quotes commas and embedded quotes", () => {

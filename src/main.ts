@@ -133,7 +133,7 @@ function renderResults(errors: number, skipped: number, teams: number): string {
       </div>
       <div class="table-wrap"><table><thead><tr>${CSV_HEADERS.map((header) => `<th>${escapeHtml(header)}</th>`).join("")}</tr></thead>
       <tbody>${tableRows || `<tr><td class="empty-state" colspan="8">No schedule records could be extracted.</td></tr>`}</tbody></table></div>
-      <p class="match-note">Match labels are inferred when a team has two games at each of Tables 1 and 2: earlier Table 1 is Practice, later Table 1 is Official 1, and Table 2 games are Official 2–3. Other layouts stay labeled “Robot Game” for review.</p>
+      <p class="match-note">Matches are labeled in the order listed in each team's schedule: Practice, Official 1, Official 2, and Official 3.</p>
       <div class="file-report"><div class="file-report-heading"><h3>Files processed</h3><span>${fileResults.length} total</span></div>${fileRows}</div>
     </section>`;
 }
